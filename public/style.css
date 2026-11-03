@@ -1,0 +1,120 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #f4f2fb;
+  --surface: #ffffff;
+  --text: #1f1b2e;
+  --text-muted: #6b6580;
+  --accent: purple;
+  --accent-soft: #f0e6f6;
+  --border: #e4dff0;
+  --shadow: 0 8px 24px rgba(80, 40, 120, 0.1);
+  --radius: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14111d;
+    --surface: #1e1a2b;
+    --text: #f1eefa;
+    --text-muted: #a49cbc;
+    --accent-soft: #2c2340;
+    --border: #322b47;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* ---------- Current weather card ---------- */
+#weather {
+  width: 100%;
+  max-width: 900px;
+  padding: 1.75rem 2rem;
+  background: linear-gradient(135deg, #7b2ff7 0%, #a855c8 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+#weather h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+#weather p {
+  margin: 0.25rem 0;
+  font-size: 1.05rem;
+  opacity: 0.95;
+}
+
+#weather p:first-of-type {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Loading and error messages */
+#weather > p:only-child {
+  text-align: center;
+  opacity: 0.85;
+  font-style: italic;
+}
+
+/* ---------- Chart card ---------- */
+#plot-card {
+  width: 100%;
+  max-width: 900px;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+#chart {
+  width: 100%;
+  min-height: 400px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
+
+  #weather {
+    padding: 1.25rem;
+  }
+
+  #weather h2 {
+    font-size: 1.4rem;
+  }
+
+  #plot-card {
+    padding: 0.75rem;
+  }
+
+  #chart {
+    min-height: 320px;
+  }
+}
