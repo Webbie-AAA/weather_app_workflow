@@ -39,21 +39,13 @@ jobs:
       - name: Commit weather data if changed
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add data/weather.json data/weather_log.csv
+          git add data/weather.json data/weather_log.csv || true
 
-          if ! git diff --cached --quiet; then
-            git commit -m "ci: update weather data"
-            git push
-          else
-            echo "No changes to commit"
-          fi
+          
+          git commit -m "ci: update weather data" || echo "No change to commit"
+          git push || echo "No changes to commit"
 
       - name: Trigger Render Deploy
-        env:
-          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
-        run: |
-          curl --fail --show-error --silent \
-            --retry 3 \
-            -X POST "$RENDER_DEPLOY_HOOK"
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK}}
